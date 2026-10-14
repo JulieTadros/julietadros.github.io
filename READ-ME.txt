@@ -1,4 +1,0 @@
-Latest update: new Brillo index cover, original proportions preserved, titles and cover tops aligned.
-Replace index.html and assets/brillo-charcoal-chef.png.
-Merge assets into your existing folder; keep all other files.
-This ZIP contains the complete website including earlier updates.
