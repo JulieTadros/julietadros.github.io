@@ -1,0 +1,17 @@
+/* Aligned rows, retaining the original image proportions and selected order. */
+.project-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:start!important;column-gap:30px!important;row-gap:56px!important}
+.project-grid .project{margin-top:0!important;align-self:start!important}
+.project-grid .project-image{aspect-ratio:auto!important;height:auto!important;background:transparent!important}
+.project-grid .project-image img{width:100%!important;height:auto!important;object-fit:contain!important;transform:none!important}
+.project-grid .web-screen[data-crop-before]{min-height:0!important}
+@media(max-width:680px){.project-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;column-gap:16px!important}}
+.project-grid{grid-auto-rows:auto!important;grid-auto-flow:row!important}
+.project-grid .project-name{height:2.4em!important;align-items:flex-end!important;margin:0 0 10px!important}
+.project-grid .project-caption{padding-top:10px!important}
+@media(max-width:420px){.project-grid{grid-template-columns:1fr!important;row-gap:42px!important}.project-grid .project{width:100%}}
+/* Individual cover refinements, without changing the aligned row structure. */
+.project-grid .project[data-cover="nova"] .project-image{aspect-ratio:5/7!important;overflow:hidden}
+.project-grid .project[data-cover="nova"] .project-image img{height:100%!important;object-fit:cover!important;object-position:center top!important}
+.project-grid .project[data-cover="your-life"] .project-image{aspect-ratio:1!important;overflow:hidden}
+.project-grid .project[data-cover="your-life"] .project-image img{height:100%!important;object-fit:cover!important;object-position:center!important}
+.project-grid .project[data-cover="grid"] .project-image{padding-block:5%;background:#000!important}
