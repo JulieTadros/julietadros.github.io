@@ -1,0 +1,33 @@
+After replacing the code, delete these obsolete files from the MAIN GitHub repository if present. Uploading/merging a ZIP does not remove old repository files. Do not delete other assets.
+
+assets/media-3100e775e8616cd2611b.woff2
+assets/media-7291b5970da223744127.woff2
+assets/media-8b2a6834cfe1f4e0f372.woff2
+assets/media-8cd08d97e89c24d0aa92.ttf
+assets/font-licenses/inter-OFL.txt
+assets/font-licenses/stix-two-math-OFL.txt
+assets/font-licenses/jost-OFL.txt
+assets/font-licenses/montserrat-OFL.txt
+assets/font-licenses/nunito-sans-OFL.txt
+demos/minimal-interiors/assets/font-4.ttf
+demos/minimal-interiors/assets/font-5.ttf
+demos/minimal-interiors/assets/font-licenses/font-4-OFL.txt
+demos/minimal-interiors/assets/font-licenses/font-5-OFL.txt
+
+ADDITIONAL ELEMENTS FONT FILES — IDENTIFIED BY FILE CONTENT, 22 OCTOBER 2026
+These .bin files are WOFF fonts. Delete them after replacing the main portfolio HTML/CSS. Their loading instructions are absent from the cleaned package.
+
+assets/media-276d7c678066cea3afd1.bin
+assets/media-2f6caaac1232e353157f.bin
+assets/media-32b0bfb632298f7c0813.bin
+assets/media-5bfdd2bde12297af5d59.bin
+assets/media-5e8b80e3ba8c0069afb0.bin
+assets/media-674cf8c7873a43600ba7.bin
+assets/media-997ef39860c7a68f655d.bin
+assets/media-9c61cdf27bcb6650f247.bin
+assets/media-9ef739a1b9fd42fd6d9a.bin
+assets/media-b60f092c7197eb5317e0.bin
+assets/media-c361575b44e118069ec0.bin
+assets/media-f4909a152ce1f11c22f0.bin
+
+Do NOT delete every .bin file: assets/media-6cde4f3e503f0c042e73.bin is an MP4 video, not a font.

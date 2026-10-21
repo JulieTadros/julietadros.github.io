@@ -1,0 +1,29 @@
+CURRENT UPDATE: See FONT-CLEANUP.txt. The main site is now standardised on DM Sans and IvyPresto Headline; unused font definitions/assets have been removed from these packages. Earlier inventory below is historical.
+
+PREPUBLICATION RIGHTS CHECK — 21 October 2026
+
+SCOPE: the standalone interior portfolio and its mirrored preview in the main portfolio. See FONT-AUDIT.md for the expanded whole-portfolio font audit. This does not clear image rights across the whole portfolio.
+
+Verified font identities from binary metadata:
+DM Sans; Libre Caslon Text regular/italic; PT Serif regular/italic; Source Serif 4 regular/italic and variable italic. These fonts carry SIL OFL identifiers. Full OFL text and the copyright statements from the distributed binaries have been added under assets/font-licenses. No font binaries were modified.
+
+ADOBE EMBED — UPDATED WITH USER-SUPPLIED NANUM KIT:
+The user supplied the Adobe Fonts embed for kit ikn7ubz on 21 October 2026. This embed now replaces both earlier kits (leu5ftb and ufi2znp) in the downloadable files. It uses Adobe's hosted delivery method. Account ownership and subscription entitlement cannot be independently verified from the public kit response. No commercial Adobe font binaries are bundled locally. Image and divider permissions below remain unresolved.
+
+IMAGES AND DIVIDER — NOT CLEARED:
+There are 28 project image files and one vintage divider SVG. No source-specific licences, client permissions or employer agreements were supplied with this package. Moodboard reference photos and furniture/product cutouts have third-party provenance that needs checking. Original project work may be subject to employment/client agreements. The supplied relief artwork photograph also needs its image-source/photographer or generation provenance confirmed. Uploading an asset and adding a credit do not by themselves establish publication permission.
+
+No commercial font binaries were found among the local TTF files. No external JavaScript libraries beyond Adobe Typekit were found. This code inspection does not establish authorship or originality of every line of code.
+
+Unresolved facts to confirm: Adobe web project ownership; source/licence of the divider; image/reference-photo/product-cutout licences; and any project confidentiality or employer/client restrictions.
+
+Visual styling has not been changed. Font delivery in these packages uses the user-supplied Nanum embed, and font notices have been added. Nothing has been published or made public by this audit.
+
+References:
+https://openfontlicense.org/ofl-faq/
+https://helpx.adobe.com/fonts/web/font-licensing/webfont-licensing.html
+https://github.com/google/fonts/tree/main/ofl/nanummyeongjo
+https://github.com/google/fonts/tree/main/ofl/ptserif
+https://github.com/google/fonts/tree/main/ofl/librecaslontext
+https://github.com/googlefonts/dm-fonts
+https://github.com/adobe-fonts/source-serif
