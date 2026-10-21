@@ -6,6 +6,7 @@
   const measure=()=>{try{
    const doc=screen.contentDocument;if(!doc||!doc.body)return;
    cropStart=0;
+   if(frame.dataset.cropStart){const start=doc.querySelector(frame.dataset.cropStart);if(start)cropStart=Math.ceil(start.getBoundingClientRect().top+screen.contentWindow.scrollY);}
    if(frame.dataset.cropHeader){doc.querySelectorAll('#site-header,#app>header,.concept-banner').forEach(el=>{cropStart=Math.max(cropStart,Math.ceil(el.getBoundingClientRect().bottom+screen.contentWindow.scrollY))});}
    if(!frame.dataset.cropBefore){screen.style.height=(1100+cropStart)+'px';fit();return;}
    const boundary=doc.querySelector(frame.dataset.cropBefore);if(!boundary)return;

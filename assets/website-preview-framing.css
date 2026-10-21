@@ -1,0 +1,13 @@
+/* Website previews: a top/side border, with the site running off the bottom. */
+.web-project-stage,.project .web-project-stage,.web-project-stage.forest,.web-project-stage.woven{padding:9% 9% 0!important;background:#3A2A22!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:hidden;display:block!important;aspect-ratio:auto!important}
+.web-project-stage.forest,.project .web-project-stage.forest{background:#434C47!important}
+.web-project-stage.interiors,.project .web-project-stage.interiors{background:#46170A!important}
+.web-project-stage::before,.web-project-stage::after{display:none!important;content:none!important}
+.web-static-screen{display:block;width:100%;overflow:hidden;background:#F9F9F9}
+.web-static-screen img,.project .web-static-screen img{display:block;width:100%!important;height:auto!important;margin:0!important;border:0!important;transform:none!important;object-fit:contain!important}
+.web-project-stage .web-screen{margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;min-height:0!important}
+.web-mobile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;padding:0!important;background:transparent!important;align-items:start}
+.web-mobile-grid>.web-project-stage{padding:9% 9% 0!important;min-width:0}
+.web-mobile-grid .web-screen:last-child{grid-column:auto;width:100%;max-width:none;justify-self:stretch}
+@media(max-width:600px){.web-mobile-grid{gap:16px}}
+@media(max-width:400px){.web-mobile-grid{grid-template-columns:1fr}.web-mobile-grid>.web-project-stage{width:100%;max-width:260px;justify-self:center}}
