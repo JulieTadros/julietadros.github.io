@@ -1,0 +1,13 @@
+# Exclude repository metadata and local build files from website uploads.
+**/.git
+**/.git/**
+**/.github
+**/.github/**
+**/node_modules
+**/node_modules/**
+**/.wrangler
+**/.wrangler/**
+**/.DS_Store
+**/.env*
+**/.dev.vars*
+.assetsignore
