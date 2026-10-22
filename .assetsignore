@@ -1,4 +1,3 @@
-# Exclude repository metadata and local build files from website uploads.
 **/.git
 **/.git/**
 **/.github
@@ -10,4 +9,13 @@
 **/.DS_Store
 **/.env*
 **/.dev.vars*
-.assetsignore
+/.assetsignore
+/cloudflare
+/cloudflare/**
+/wrangler.jsonc
+/wrangler.json
+/wrangler.toml
+/*.md
+/*.txt
+/*.zip
+!/robots.txt
