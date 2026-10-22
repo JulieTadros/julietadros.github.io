@@ -173,7 +173,11 @@ export default {
     }
     if (url.pathname.startsWith('/_portfolio/')) return response('Not found.', 404);
     // This binding is reached only after the signed session has been verified.
-    const asset = await env.ASSETS.fetch(request);
+    // With html_handling: none, the binding expects an actual file path.
+    // Keep the browser URL unchanged so relative images and links still work.
+    const assetUrl = new URL(request.url);
+    if (assetUrl.pathname.endsWith('/')) assetUrl.pathname += 'index.html';
+    const asset = await env.ASSETS.fetch(new Request(assetUrl, request));
     const headers = new Headers(asset.headers);
     for (const [name, value] of Object.entries(baseHeaders)) headers.set(name, value);
     return new Response(asset.body, { status: asset.status, statusText: asset.statusText, headers });

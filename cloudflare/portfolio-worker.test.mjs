@@ -167,3 +167,31 @@ test('native form pages preserve Origin while asset and access-link responses su
   const asset = await worker.fetch(request('/assets/private.jpg', { headers: { Cookie: cookie } }), env);
   assert.equal(asset.headers.get('Referrer-Policy'), 'no-referrer');
 });
+test('application link opens the real homepage and directory indexes with exact asset paths', async () => {
+  const { env } = fixture();
+  const requested = [];
+  const files = new Map([
+    ['/index.html', 'PORTFOLIO HOMEPAGE'],
+    ['/demos/example/index.html', 'DEMO HOMEPAGE'],
+    ['/office-my-home.html', 'CASE STUDY'],
+    ['/assets/photo.jpg', 'IMAGE']
+  ]);
+  env.ASSETS.fetch = async r => {
+    const path = new URL(r.url).pathname;
+    requested.push(path);
+    return new Response(files.get(path) || 'Not found', { status: files.has(path) ? 200 : 404 });
+  };
+  const { url } = await makeLink(env);
+  const open = await worker.fetch(new Request(url), env);
+  assert.equal(open.headers.get('Location'), '/');
+  const cookie = open.headers.get('Set-Cookie').split(';')[0];
+  for (const [path, text] of [['/', 'PORTFOLIO HOMEPAGE'], ['/demos/example/', 'DEMO HOMEPAGE'], ['/office-my-home.html', 'CASE STUDY'], ['/assets/photo.jpg', 'IMAGE']]) {
+    const r = await worker.fetch(request(path, { headers: { Cookie: cookie } }), env);
+    assert.equal(r.status, 200);
+    assert.equal(await r.text(), text);
+  }
+  assert.deepEqual(requested, ['/index.html', '/demos/example/index.html', '/office-my-home.html', '/assets/photo.jpg']);
+  requested.length = 0;
+  await worker.fetch(request('/'), env);
+  assert.equal(requested.length, 0);
+});
