@@ -150,3 +150,20 @@ test('modified and other-host access links are rejected; HEAD does not consume a
   assert.equal((await worker.fetch(new Request(url, { method: 'HEAD' }), env)).status, 200);
   assert.equal((await worker.fetch(new Request(url), env)).status, 303);
 });
+test('native form pages preserve Origin while asset and access-link responses suppress referrers', async () => {
+  const { env } = fixture();
+  for (const path of ['/', '/_portfolio/login', '/_portfolio/manage']) {
+    const r = await worker.fetch(request(path), env);
+    assert.equal(r.headers.get('Referrer-Policy'), 'same-origin');
+  }
+  // Do not weaken origin validation to accept null or missing origins.
+  assert.equal((await worker.fetch(submit(env.PORTFOLIO_PASSWORD, '/', { Origin: 'null' }), env)).status, 403);
+  const rejected = await worker.fetch(request('/_portfolio/manage', { method: 'POST', headers: { Origin: 'null', 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ password: env.PORTFOLIO_PASSWORD, days: '30', next: '/' }) }), env);
+  assert.equal(rejected.status, 403);
+  const { url } = await makeLink(env);
+  const open = await worker.fetch(new Request(url), env);
+  assert.equal(open.headers.get('Referrer-Policy'), 'no-referrer');
+  const cookie = open.headers.get('Set-Cookie').split(';')[0];
+  const asset = await worker.fetch(request('/assets/private.jpg', { headers: { Cookie: cookie } }), env);
+  assert.equal(asset.headers.get('Referrer-Policy'), 'no-referrer');
+});
