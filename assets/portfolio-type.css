@@ -135,3 +135,6 @@ body:has(.hero#home):has(#step-panel) .deliverables-head h3{font-size:20px!impor
 /* OfficemyHome: preserve badge colours and white form fields. */
 body:has(.hero#home):has(#step-panel) .contact-badges img{mix-blend-mode:normal;filter:none;opacity:1}
 body:has(.hero#home):has(#step-panel) .contact input,body:has(.hero#home):has(#step-panel) .contact select,body:has(.hero#home):has(#step-panel) .contact textarea{background:#fff}
+
+/* OfficemyHome: accessible form boundaries, 3.54:1 against peach. */
+body:has(.hero#home):has(#step-panel) .contact input,body:has(.hero#home):has(#step-panel) .contact select,body:has(.hero#home):has(#step-panel) .contact textarea{border-color:#856C59}
