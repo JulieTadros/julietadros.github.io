@@ -131,3 +131,7 @@ body:has(.hero#home):has(#step-panel) .intro h2 em{font-size:33px!important}
 body:has(.hero#home):has(#step-panel) .deliverable-slides{padding-inline:7%;scroll-padding-inline:7%;gap:13px}
 body:has(.hero#home):has(#step-panel) .deliverables-head h3{font-size:20px!important}
 }
+
+/* OfficemyHome: preserve badge colours and white form fields. */
+body:has(.hero#home):has(#step-panel) .contact-badges img{mix-blend-mode:normal;filter:none;opacity:1}
+body:has(.hero#home):has(#step-panel) .contact input,body:has(.hero#home):has(#step-panel) .contact select,body:has(.hero#home):has(#step-panel) .contact textarea{background:#fff}
