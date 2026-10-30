@@ -97,3 +97,20 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 :root{--sans:'DM Sans Variable',Arial,sans-serif!important;--body:'DM Sans Variable',Arial,sans-serif!important;--serif:'ivypresto-headline',Georgia,serif!important;--display:'ivypresto-headline',Georgia,serif!important;--heading:'DM Sans Variable',Arial,sans-serif!important;--quote-font:'ivypresto-headline',Georgia,serif!important}
 body,button,input,textarea,select{font-family:'DM Sans Variable',Arial,sans-serif}h1,h2,h3{font-family:var(--serif);font-weight:300}.name,.logo{font-family:var(--sans);font-weight:600}.intro p,.project-copy,figcaption,.hub-card p{font-family:var(--sans);font-style:normal}
 
+
+/* OfficemyHome: Julie's 30 October typography and grid notes. */
+body:has(.hero#home):has(#step-panel),body:has(.hero#home):has(#step-panel) *,body:has(.hero#home):has(#step-panel) *::before,body:has(.hero#home):has(#step-panel) *::after{letter-spacing:0!important}
+body:has(.hero#home):has(#step-panel) .intro h2 em,body:has(.hero#home):has(#step-panel) .bring-it{font-weight:400!important}
+body:has(.hero#home):has(#step-panel) .pricecard h3,body:has(.hero#home):has(#step-panel) .benefits article:nth-child(-n+2) h3,body:has(.hero#home):has(#step-panel) .deliverables-head h3{font-weight:500!important}
+body:has(.hero#home):has(#step-panel) #how:has(#tab1[aria-selected="true"]) #step-title{font-weight:600!important}
+body:has(.hero#home):has(#step-panel) .deliverables,body:has(.hero#home):has(#step-panel) .deliverable-carousel,body:has(.hero#home):has(#step-panel) .deliverable-caption{max-width:none}
+body:has(.hero#home):has(#step-panel) .deliverable-carousel{padding-inline:0}
+body:has(.hero#home):has(#step-panel) .deliverable-carousel>button:first-of-type{left:-35px}
+body:has(.hero#home):has(#step-panel) .deliverable-carousel>button:last-of-type{right:-35px}
+body:has(.hero#home):has(#step-panel) .deliverable-caption{padding-inline:0}
+@media(max-width:720px){
+ body:has(.hero#home):has(#step-panel) .deliverables-head,body:has(.hero#home):has(#step-panel) .deliverable-caption{padding-inline:28px}
+ body:has(.hero#home):has(#step-panel) .deliverable-carousel{padding-inline:28px}
+ body:has(.hero#home):has(#step-panel) .deliverable-carousel>button:first-of-type{left:0}
+ body:has(.hero#home):has(#step-panel) .deliverable-carousel>button:last-of-type{right:0}
+}
