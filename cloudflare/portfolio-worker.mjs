@@ -1,6 +1,7 @@
 const COOKIE = '__Host-portfolio';
 const TTL = 86400;
 const LINK_TTL = 30 * 86400;
+const analyticsSnippet = `<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token":"81aefef704674d76b92eaf3cc726a25e"}'></script>`;
 const encoder = new TextEncoder();
 const baseHeaders = {
   'Cache-Control': 'private, no-store',
@@ -49,16 +50,17 @@ async function createSession(env, origin, expiry = Math.floor(Date.now() / 1000)
   const signature = await crypto.subtle.sign('HMAC', await signingKey(env), encoder.encode(origin + '\0' + payload));
   return payload + '.' + bytesToHex(signature);
 }
-async function authenticated(request, env) {
+async function sessionKind(request, env) {
   const token = (request.headers.get('Cookie') || '').split(';').map(v => v.trim()).find(v => v.startsWith(COOKIE + '='))?.slice(COOKIE.length + 1);
-  if (token?.startsWith('v2.')) return !!await verifyAccessToken(token, env, new URL(request.url).origin, 'visitor');
-  if (!token || token.length > 200) return false;
+  if (token?.startsWith('v2.')) return await verifyAccessToken(token, env, new URL(request.url).origin, 'visitor') ? 'visitor' : null;
+  if (!token || token.length > 200) return null;
   const match = /^(v1:(\d{10}):[a-f0-9-]{36})\.([a-f0-9]{64})$/.exec(token);
-  if (!match) return false;
+  if (!match) return null;
   const expiry = Number(match[2]), now = Math.floor(Date.now() / 1000);
-  if (expiry <= now || expiry > now + TTL + 60) return false;
+  if (expiry <= now || expiry > now + TTL + 60) return null;
   const signature = Uint8Array.from(match[3].match(/../g), v => parseInt(v, 16));
-  return crypto.subtle.verify('HMAC', await signingKey(env), signature, encoder.encode(new URL(request.url).origin + '\0' + match[1]));
+  const valid = await crypto.subtle.verify('HMAC', await signingKey(env), signature, encoder.encode(new URL(request.url).origin + '\0' + match[1]));
+  return valid ? 'owner' : null;
 }
 async function signAccessToken(payload, env, origin) {
   const encoded = btoa(JSON.stringify(payload)).replaceAll('+', '-').replaceAll('/', '_').replaceAll('=', '');
@@ -167,7 +169,8 @@ export default {
     }
     if (!['GET', 'HEAD'].includes(request.method)) return response('Method not allowed.', 405, { Allow: 'GET, HEAD' });
     if (login) return request.method === 'HEAD' ? response(null) : gate(nextPath(url.searchParams.get('next'), url.origin));
-    if (!await authenticated(request, env)) {
+    const session = await sessionKind(request, env);
+    if (!session) {
       if (request.method === 'HEAD') return response(null, 401);
       return gate(nextPath(url.pathname + url.search, url.origin));
     }
@@ -180,7 +183,19 @@ export default {
     const asset = await env.ASSETS.fetch(new Request(assetUrl, request));
     const headers = new Headers(asset.headers);
     for (const [name, value] of Object.entries(baseHeaders)) headers.set(name, value);
-    return new Response(asset.body, { status: asset.status, statusText: asset.statusText, headers });
+    const contentType = headers.get('Content-Type')?.split(';', 1)[0].trim().toLowerCase();
+    const trackVisit = session === 'visitor' && request.method === 'GET' && asset.status === 200 && contentType === 'text/html';
+    if (trackVisit) {
+      headers.delete('Content-Length');
+      headers.delete('ETag');
+    }
+    const page = new Response(asset.body, { status: asset.status, statusText: asset.statusText, headers });
+    if (!trackVisit) return page;
+    return new HTMLRewriter().on('body', {
+      element(body) {
+        body.append(analyticsSnippet, { html: true });
+      }
+    }).transform(page);
   }
 };
 export { createSession };
